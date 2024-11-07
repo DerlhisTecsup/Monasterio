@@ -1,5 +1,5 @@
-import { Sequelize } from 'sequelize';
-import dotenv from 'dotenv';
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -10,26 +10,25 @@ const sequelize = new Sequelize(
   {
     host: process.env.PG_HOST,
     port: process.env.PG_PORT,
-    dialect: 'postgres',
+    dialect: "postgres",
     logging: false,
     pool: {
       max: 5,
       min: 0,
       acquire: 60000,
-      idle: 10000
-    }
+      idle: 10000,
+    },
   }
 );
-import '../models/usermodel.js';
 
 export const connectDb = async () => {
   try {
     await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-    await sequelize.sync({ alter: true }); 
-    console.log('All models were synchronized successfully.');
+    console.log("Connection has been established successfully.");
+    await sequelize.sync({ alter: true });
+    console.log("All models were synchronized successfully.");
   } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    console.error("Unable to connect to the database:", error);
   }
 };
 
